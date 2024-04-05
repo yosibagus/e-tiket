@@ -12,11 +12,25 @@ class TransaksiModel extends Model
     protected $table = "tb_tiket";
     protected $guarded = [];
 
-    public static function getAllTransaksi($tipe)
+    public static function getAllTransaksi($tipe, $userid)
     {
         $query = DB::table('tb_tiket')
-            ->join('users', 'users.id', '=', 'tb_tiket.user_id')
-            ->where('tipe', $tipe);
+            ->where([
+                ['tipe', '=', $tipe],
+                ['user_id', '=', $userid]
+            ]);
+        return $query;
+    }
+
+    public static function getTransaksi($id = null)
+    {
+        $query = DB::table('tb_tiket')
+            ->join('users', 'users.id', '=', 'tb_tiket.user_id');
+
+        if (!empty($id)) {
+            $query->where('user_id', $id);
+        }
+
         return $query;
     }
 }

@@ -24,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Favicon icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('t2s.svg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo.png') }}">
     <link href="{{ asset('xhtml') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('xhtml/vendor/select2/css/select2.min.css') }}">
     <link href="{{ asset('xhtml') }}/vendor/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet">
@@ -112,8 +112,8 @@
                                     <img src="https://static.vecteezy.com/system/resources/previews/024/983/914/original/simple-user-default-icon-free-png.png"
                                         width="20" alt="">
                                     <div class="header-info">
-                                        <span class="text-black"><strong>Yosi Bagus</strong></span>
-                                        <p class="fs-12 mb-0">Admin</p>
+                                        <span class="text-black"><strong>{{ Auth::user()->name }}</strong></span>
+                                        <p class="fs-12 mb-0">{{ Auth::user()->role }}</p>
                                     </div>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
@@ -146,7 +146,7 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a href="{{ url('') }}" class="ai-icon" aria-expanded="false">
+                    <li><a href="{{ url('/home') }}" class="ai-icon" aria-expanded="false">
                             <i class="flaticon-381-networking"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
@@ -168,18 +168,20 @@
                             <span class="nav-text">Rekapitulasi Transaksi</span>
                         </a>
                     </li>
-                    <li class="@active('petugas/*')"><a href="{{ url('setting') }}" class="ai-icon"
-                            aria-expanded="false">
-                            <i class="flaticon-381-user"></i>
-                            <span class="nav-text">Akses</span>
-                        </a>
-                    </li>
-                    <li class="@active('setting/*')"><a href="{{ url('setting') }}" class="ai-icon"
-                            aria-expanded="false">
-                            <i class="flaticon-381-settings-2"></i>
-                            <span class="nav-text">Setting Tiket</span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->role == 'Admin')
+                        <li class="@active('petugas/*')"><a href="{{ url('setting') }}" class="ai-icon"
+                                aria-expanded="false">
+                                <i class="flaticon-381-user"></i>
+                                <span class="nav-text">Akses</span>
+                            </a>
+                        </li>
+                        <li class="@active('setting/*')"><a href="{{ url('setting') }}" class="ai-icon"
+                                aria-expanded="false">
+                                <i class="flaticon-381-settings-2"></i>
+                                <span class="nav-text">Setting Tiket</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 <div class="copyright">
                     <img src="{{ asset('bem.png') }}" width="150" alt="">

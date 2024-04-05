@@ -8,10 +8,19 @@
         @csrf
         <div class="col-xl-12">
             <div class="card">
-                <div class="card-header">
-                    Form Transaksi
+                <div class="card-header d-flex py-3">
+                    <h4 class="card-title">Transaksi</h4>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-success btn-sm"><i class="bi bi-check-lg"></i>
+                            Selesaikan Transaksi</button>
+                        &nbsp; <a href="{{ url('transaksi/' . $tipe) }}" class="btn btn-danger btn-sm">
+                            Kembali</a>
+                    </div>
                 </div>
                 <div class="card-body">
+                    <div class="mb-2 text-black">
+                        <b> Tagihan Tiket : Rp{{ number_format($kategori->harga_kategori, 0, 2, '.') }}</b>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="nama_pembeli">Atas Nama <small class="text-danger">*</small></label>
@@ -29,11 +38,6 @@
                                 Harga tiket tidak boleh dikosongi.
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-4">
-                        <button class="btn btn-primary btn-sm"><i class="bi bi-check-lg"></i> Simpan Data</button>
-                        <a href="{{ url('transaksi/' . $tipe) }}" class="btn btn-danger btn-sm">
-                            Kembali</a>
                     </div>
                 </div>
             </div>

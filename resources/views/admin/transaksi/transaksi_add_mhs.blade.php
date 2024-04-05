@@ -52,6 +52,9 @@
                         @elseif ($cek == '404')
                             NIM Tidak terdaftar / Tidak ditemukan!
                         @elseif ($cek == 'ok')
+                            <div class="mb-2 text-black">
+                                <b> Tagihan Tiket : Rp{{ number_format($kategori->harga_kategori, 0, 2, '.') }}</b>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="nama_pembeli">Atas Nama <small class="text-danger">*</small></label>

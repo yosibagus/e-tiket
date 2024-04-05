@@ -4,16 +4,18 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\TransaksiTiketJob;
+use App\Models\KategoriModel;
 use App\Models\MahasiswaModel;
 use App\Models\TransaksiModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Queue;
 
 class TransaksiController extends Controller
 {
     public function index($tipe)
     {
-        $transaksi = TransaksiModel::getAllTransaksi($tipe)->get();
+        $transaksi = TransaksiModel::getAllTransaksi($tipe, Auth::user()->id)->get();
         return view('admin.transaksi.transaksi_view', compact('tipe', 'transaksi'));
     }
 
@@ -35,16 +37,18 @@ class TransaksiController extends Controller
                     $data['cek'] = '404';
                 }
             }
+            $data['kategori'] = KategoriModel::where('id_kategori', 1)->first();
             return view('admin.transaksi.transaksi_add_mhs', $data);
         } else {
+            $data['kategori'] = KategoriModel::where('id_kategori', 2)->first();
             return view('admin.transaksi.transaksi_add', $data);
         }
     }
-    
+
     public function store($tipe, Request $request)
     {
         $nowa = $request->nowa;
-        $userid = 1;
+        $userid = Auth::user()->id;
         $token = uniqid();
         $kode = date('dmy') . '-' . uniqid();
         $tgl_pembelian = date('Y-m-d H:i:s');
@@ -58,6 +62,8 @@ class TransaksiController extends Controller
             $kat = 2;
         }
 
+        $harga =  KategoriModel::where('id_kategori', $kat)->first();
+
         $data = [
             'kode_tiket' => $kode,
             'nim_mahasiswa' => $nim,
@@ -67,7 +73,8 @@ class TransaksiController extends Controller
             'tgl_pembelian' => $tgl_pembelian,
             'tipe' => $tipe,
             'user_id' => $userid,
-            'kategori_id' => $kat
+            'kategori_id' => $kat,
+            'tagihan' => $harga->harga_kategori
         ];
 
         TransaksiModel::create($data);
@@ -75,11 +82,16 @@ class TransaksiController extends Controller
         $job = new TransaksiTiketJob($nama_pembeli, $nowa, $kode);
         Queue::push($job);
 
-        return redirect('transaksi/add/' . $tipe)->with('success', 'Berhasil Disimpan');
+        return redirect('transaksi/add/' . $tipe)->with('success', 'Transaksi Berhasil');
     }
 
     public function rekapitulasi()
     {
-        return view('admin.transaksi.transaksi_rekap');
+        if (Auth::user()->role == 'Admin') {
+            $rekapitulasi = TransaksiModel::getTransaksi()->get();
+        } else {
+            $rekapitulasi = TransaksiModel::getTransaksi(Auth::user()->id)->get();
+        }
+        return view('admin.transaksi.transaksi_rekap', compact('rekapitulasi'));
     }
 }
