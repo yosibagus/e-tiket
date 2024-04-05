@@ -171,7 +171,7 @@
                         </a>
                     </li>
                     @if (Auth::user()->role == 'Admin')
-                        <li class="@active('petugas/*')"><a href="{{ url('setting') }}" class="ai-icon"
+                        <li class="@active('akses/*')"><a href="{{ url('akses') }}" class="ai-icon"
                                 aria-expanded="false">
                                 <i class="flaticon-381-user"></i>
                                 <span class="nav-text">Akses</span>

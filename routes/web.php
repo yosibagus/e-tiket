@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AksesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\TransaksiController;
@@ -36,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/transaksi/{tipe}', [TransaksiController::class, 'index']);
     Route::get('/transaksi/add/{tipe}', [TransaksiController::class, 'create']);
     Route::post('/transaksi/add/{tipe}', [TransaksiController::class, 'store']);
+
+    Route::get('/akses', [AksesController::class, 'index']);
 
     Route::get('/setting', [KategoriController::class, 'index']);
     Route::get('/setting/create', [KategoriController::class, 'create']);

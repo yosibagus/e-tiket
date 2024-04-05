@@ -40,9 +40,9 @@
                                     <p class="fs-14 mb-2">Penghasilan</p>
                                     @if ($terjual > 0)
                                         <span class="text-black font-w600"
-                                            style="font-size: 25px">{{ number_format($penghasilan, 0, 2, '.') }}</span>
+                                            style="font-size: 22px">{{ number_format($penghasilan, 0, 2, '.') }}</span>
                                     @else
-                                        <span class="text-black font-w600" style="font-size: 25px">Rp0</span>
+                                        <span class="text-black font-w600" style="font-size: 22px">Rp0</span>
                                     @endif
                                 </div>
                             </div>
