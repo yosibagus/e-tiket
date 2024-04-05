@@ -33,4 +33,30 @@ class TransaksiModel extends Model
 
         return $query;
     }
+
+    public static function getPenghasilan($id = null)
+    {
+        $query = DB::table('tb_tiket');
+
+        if (!empty($id)) {
+            $query->where('user_id', $id);
+        }
+
+        return $query->sum('tagihan');
+    }
+
+    public static function getTransaksiTipe($tipe, $userid = null)
+    {
+        $query = DB::table('tb_tiket');
+        if (!empty($userid)) {
+            $query->where([
+                ['tipe', '=', $tipe],
+                ['user_id', '=', $userid]
+            ]);
+        } else {
+            $query->where('tipe', $tipe);
+        }
+
+        return $query;
+    }
 }

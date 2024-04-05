@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="alternatif" class="display min-w850">
+                        <table id="alternatif" class="display min-w850 mb-4">
                             <thead>
                                 <tr>
                                     <th>No</th>

@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="nama_pembeli">Atas Nama <small class="text-danger">*</small></label>
-                            <input required type="text" class="form-control" id="nama_pembeli" name="nama_pembeli"
+                            <input required type="text" autofocus class="form-control" id="nama_pembeli" name="nama_pembeli"
                                 autocomplete="off" placeholder="Masukkan nama pembeli tiket" value="">
                             <div class="invalid-feedback">
                                 Harga tiket tidak boleh dikosongi.

@@ -16,13 +16,13 @@
                                 </span>
                                 <div class="media-body">
                                     <p class="fs-14 mb-2">Tiket Terjual</p>
-                                    <span class="title text-black font-w600">42</span>
+                                    <span class="title text-black font-w600">{{ $terjual }}</span>
                                 </div>
                             </div>
                             <div class="progress" style="height:5px;">
                                 <div class="progress-bar bg-success" style="width: 100%; height:5px;"
                                     aria-label="Progess-success" role="progressbar">
-                                    <span class="sr-only">42% Complete</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
                         </div>
@@ -38,13 +38,18 @@
                                 </span>
                                 <div class="media-body">
                                     <p class="fs-14 mb-2">Penghasilan</p>
-                                    <span class="text-black font-w600" style="font-size: 20px">Rp10.000.000</span>
+                                    @if ($terjual > 0)
+                                        <span class="text-black font-w600"
+                                            style="font-size: 25px">{{ number_format($penghasilan, 0, 2, '.') }}</span>
+                                    @else
+                                        <span class="text-black font-w600" style="font-size: 25px">Rp0</span>
+                                    @endif
                                 </div>
                             </div>
                             <div class="progress" style="height:5px;">
                                 <div class="progress-bar bg-secondary" style="width: 100%; height:5px;"
                                     aria-label="Progess-secondary" role="progressbar">
-                                    <span class="sr-only">42% Complete</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
                         </div>
@@ -60,13 +65,13 @@
                                 </span>
                                 <div class="media-body">
                                     <p class="fs-14 mb-2">Mahasiswa</p>
-                                    <span class="title text-black font-w600">230 Km</span>
+                                    <span class="title text-black font-w600">{{ $mhs }}</span>
                                 </div>
                             </div>
                             <div class="progress" style="height:5px;">
                                 <div class="progress-bar bg-danger" style="width: 100%; height:5px;"
                                     aria-label="Progess-danger" role="progressbar">
-                                    <span class="sr-only">42% Complete</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
                         </div>
@@ -82,12 +87,12 @@
                                 </span>
                                 <div class="media-body">
                                     <p class="fs-14 mb-2">Non Mahasiswa</p>
-                                    <span class="title text-black font-w600">18:34:21</span>
+                                    <span class="title text-black font-w600">{{ $non }}</span>
                                 </div>
                             </div>
                             <div class="progress" style="height:5px;">
                                 <div class="progress-bar bg-warning" style="width: 100%; height:5px;" role="progressbar">
-                                    <span class="sr-only">42% Complete</span>
+                                    <span class="sr-only"></span>
                                 </div>
                             </div>
                         </div>

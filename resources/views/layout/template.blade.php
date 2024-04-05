@@ -76,7 +76,7 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo" aria-label="U-FEST">
+            <a href="{{ url('/home') }}" class="brand-logo" aria-label="U-FEST">
                 {{-- <img class="logo-abbr" src="{{ asset('logo.png') }}" alt=""> --}}
                 <img class="logo-compact" src="{{ asset('logo.png') }}" alt="">
                 <img class="brand-title" src="{{ asset('logo.png') }}" alt="">
@@ -157,10 +157,12 @@
                             <span class="nav-text">Transaksi</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li class="">
-                                <a class="" href="{{ url('transaksi/mhs') }}">Mahasiswa</a>
+                            <li class="@active('transaksi/add/mhs')">
+                                <a class="@active('transaksi/add/mhs')" class="" href="{{ url('transaksi/mhs') }}">Mahasiswa UNIBA</a>
                             </li>
-                            <li><a href="{{ url('transaksi/non') }}">Non Mahasiswa</a></li>
+                            <li class="@active('transaksi/add/non')">
+                                <a class="@active('transaksi/add/non')" href="{{ url('transaksi/non') }}">Non Mahasiswa</a>
+                            </li>
                         </ul>
                     </li>
                     <li><a href="{{ url('rekapitulasi-transaksi') }}" class="ai-icon" aria-expanded="false">
