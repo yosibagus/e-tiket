@@ -10,6 +10,7 @@ use App\Models\TransaksiModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Str;
 
 class TransaksiController extends Controller
 {
@@ -50,9 +51,10 @@ class TransaksiController extends Controller
         $nowa = $request->nowa;
         $userid = Auth::user()->id;
         $token = uniqid();
-        $kode = date('dmy') . '-' . uniqid();
+        $kode = strtoupper(Str::random(7));
         $tgl_pembelian = date('Y-m-d H:i:s');
         $nama_pembeli = $request->nama_pembeli;
+        $email_pembeli = $request->email_pembeli;
 
         if ($tipe == 'mhs') {
             $nim = $request->nim_mahasiswa;
@@ -74,12 +76,13 @@ class TransaksiController extends Controller
             'tipe' => $tipe,
             'user_id' => $userid,
             'kategori_id' => $kat,
-            'tagihan' => $harga->harga_kategori
+            'tagihan' => $harga->harga_kategori,
+            'email_pembeli' => $email_pembeli
         ];
 
         TransaksiModel::create($data);
 
-        $job = new TransaksiTiketJob($nama_pembeli, $nowa, $kode);
+        $job = new TransaksiTiketJob($nama_pembeli, $nowa, $kode, $email_pembeli);
         Queue::push($job);
 
         return redirect('transaksi/add/' . $tipe)->with('success', 'Transaksi Berhasil');

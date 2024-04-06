@@ -22,18 +22,26 @@
                         <b> Tagihan Tiket : Rp{{ number_format($kategori->harga_kategori, 0, 2, '.') }}</b>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="nama_pembeli">Atas Nama <small class="text-danger">*</small></label>
                             <input required type="text" autofocus class="form-control" id="nama_pembeli" name="nama_pembeli"
-                                autocomplete="off" placeholder="Masukkan nama pembeli tiket" value="">
+                                autocomplete="off" placeholder="Masukkan nama pembeli tiket" value="Bagus Sadar">
                             <div class="invalid-feedback">
                                 Harga tiket tidak boleh dikosongi.
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 mt-3">
+                            <label for="email_pembeli">Email <small class="text-danger">*</small></label>
+                            <input required type="email" class="form-control" id="email_pembeli" name="email_pembeli"
+                                autocomplete="off" placeholder="ex : 0818070xxxx" value="v2project2022@gmail.com">
+                            <div class="invalid-feedback">
+                                Harga tiket tidak boleh dikosongi.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
                             <label for="nowa">No WhatsApp <small class="text-danger">*</small></label>
                             <input required type="text" class="form-control" id="nowa" name="nowa"
-                                autocomplete="off" placeholder="ex : 0818070xxxx" value="">
+                                autocomplete="off" placeholder="ex : 0818070xxxx" value="081807058847">
                             <div class="invalid-feedback">
                                 Harga tiket tidak boleh dikosongi.
                             </div>

@@ -4,7 +4,9 @@ use App\Http\Controllers\admin\AksesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\KategoriController;
 use App\Http\Controllers\admin\TransaksiController;
+use App\Http\Controllers\ETiketController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OtpController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +29,8 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/', [LoginController::class, 'login']);
 });
 
+Route::get('/u-fest2024/{id}', [ETiketController::class, 'index']);
+Route::get('/coba', [OtpController::class, 'coba']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
 

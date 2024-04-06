@@ -1,72 +1,15 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-namespace App\Http\Controllers;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
 
-use Exception;
-use Illuminate\Http\Request;
-use PHPMailer\PHPMailer\PHPMailer;
-
-class OtpController extends Controller
-{
-    public function index($pesan, $target)
-    {
-        $token = 'g7r6A7asVrhMPADP+ETN';
-
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.fonnte.com/send',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => array(
-                'target' => $target,
-                'message' => $pesan,
-                'url' => 'https://yosibgsdr.site',
-            ),
-            CURLOPT_HTTPHEADER => array(
-                "Authorization: " . $token . ""
-            ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $data = json_decode($response);
-
-        return $data->status;
-    }
-
-    public function sendemail($tujuan, $nama, $kode, $tgl_pesan, $tipe)
-    {
-        $mail = new PHPMailer(true);
-
-        try {
-            $mail->SMTPDebug = false;  //Enable verbose debug output
-            $mail->isSMTP();   //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com'; //hostname/domain yang dipergunakan untuk setting smtp
-            $mail->SMTPAuth   = true;  //Enable SMTP authentication
-            $mail->Username   = 'bemkmunibamadura2024@gmail.com'; //SMTP username
-            $mail->Password   = 'hljawxhnvrvxorhf';   //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;   //Enable implicit TLS encryption
-            $mail->Port       = 465;   //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-            //Recipients
-            $mail->setFrom('bemkmunibamadura2024@gmail.com', 'BEM KM UNIBA MADURA 2024');
-            $mail->addAddress($tujuan, $nama);     //email tujuan
-
-            //Content
-            $mail->isHTML(true);   //Set email format to HTML
-            $mail->Subject = 'Pembayaran Berhasil - ' . $nama;
-
-            $kategori = $tipe == 'mhs' ? 'Mahasiswa' : 'Reguler';
-
-            $mail->Body    = '
-            <div class="">
+<body>
+    <div class="">
         <div class="aHl"></div>
         <div id=":n4" tabindex="-1"></div>
         <div id=":mu" class="ii gt"
@@ -84,7 +27,7 @@ class OtpController extends Controller
                         <div>
                             <div>
                                 <p style="font-family:Plus Jakarta Sans,sans-serif;font-size:16px;margin-top:30px;">Hai,
-                                    <strong>'. $nama .'</strong>
+                                    <strong>Nama</strong>
                                 </p>
                             </div>
                             <p
@@ -136,7 +79,7 @@ class OtpController extends Controller
                                             </td>
                                             <td
                                                 style="font-family:Plus Jakarta Sans,sans-serif;font-size:14px;padding-top:6px;padding-bottom:10px">
-                                                <b>'. $kode .'</b>
+                                                <b>F2C9CD7E1B</b>
                                             </td>
                                         </tr>
 
@@ -148,17 +91,17 @@ class OtpController extends Controller
 
                                             <th
                                                 style="font-family:Plus Jakarta Sans,sans-serif;width:250px;text-align:left;font-size:10px;font-weight:600;color:#b0b0b0;padding-top:8px;padding-bottom:2px">
-                                                Pemesanan
+                                                Jumlah Tiket
                                             </th>
                                         </tr>
                                         <tr>
                                             <td
                                                 style="font-family:Plus Jakarta Sans,sans-serif;font-size:14px;padding-top:6px;padding-bottom:10px">
-                                                <b>'. $kategori .'</b>
+                                                <b>Reguler</b>
                                             </td>
                                             <td
                                                 style="font-family:Plus Jakarta Sans,sans-serif;font-size:14px;padding-top:6px;padding-bottom:10px">
-                                                <b>'. $tgl_pesan .'</b>
+                                                <b>1</b>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -166,7 +109,7 @@ class OtpController extends Controller
 
                                 <div style="margin:24px 0 0 0">
                                     <a style="font-family:Plus Jakarta Sans,sans-serif;text-decoration:none;display:block;background-color:#241ce6;color:white;text-align:center;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.2px;padding:12px 0;border:none;width:100%"
-                                        href="https://yosibgsdr.site">
+                                        href="">
                                         Lihat e-Tiket
                                     </a>
                                 </div>
@@ -180,6 +123,8 @@ class OtpController extends Controller
                                     style="font-family:Plus Jakarta Sans,sans-serif;font-size:12px;letter-spacing:0.2px;font-style:italic">
                                     <li>Tunjukkan e-Tiket/QR Code yang telah diterima kepada panitia di lokasi event.
                                     </li>
+                                    <li>Pemilik tiket WAJIB menunjukan Kartu Identitas (KTP/Passport &amp; SIM) yang
+                                        telah terdaftar untuk verifikasi data diri.</li>
                                     <li>Setelah sudah terverifikasi, Pemilik tiket dapat memasuki event.</li>
                                     <li>Pengunjung WAJIB untuk mematuhi aturan yang berlaku selama acara berlangsung.
                                     </li>
@@ -232,7 +177,8 @@ class OtpController extends Controller
 
                             <div
                                 style="font-size:0.75rem;line-height:20px;border-bottom-style:solid;border-bottom-width:1px;color:#646464;border-color:#dadada;text-align:left;margin-top:10px">
-                                <label for="m_507380816594962961">Email ini ditujukan untuk '. $nama .', karena sudah melakukan reservasi melalui Panitia UNIBA FESTIVAL 2024.</label>
+                                <label for="m_507380816594962961">Email ini ditujukan untuk kifliyatin nabila putri
+                                    salsabilah, karena sudah melakukan reservasi melalui Panitia U-FEST.</label>
                                 <div class="yj6qo"></div>
                                 <div class="adL">
                                 </div>
@@ -256,14 +202,6 @@ class OtpController extends Controller
         </div>
         <div class="WhmR8e" data-hash="0"></div>
     </div>
-            ';
+</body>
 
-            $mail->AltBody = '';
-
-            $mail->send();
-            echo 'Message has been sent';
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
-}
+</html>
