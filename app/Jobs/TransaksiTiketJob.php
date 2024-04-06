@@ -36,12 +36,14 @@ class TransaksiTiketJob implements ShouldQueue
     public function handle(): void
     {
         $otp = new OtpController();
-        $pesan = "*Terimakasih $this->nama_pembeli*\nAnda berhasil aktivasi Elektronik Tiket *UNIBA FESTIVAL 2024*\n\nSilahkan klik link berikut untuk mendownload e-tiket : https://yosibgsdr.site\n\n*jagalah kerahasiaan e-tiket anda, karena e-tiket hanya bisa digunakan satu kali.";
-        $status = $otp->index($pesan, $this->nowa);
-
         $row = TransaksiModel::where('kode_tiket', $this->kode)->first();
 
-        $otp->sendemail($this->email, $this->nama_pembeli, $this->kode, $row->tgl_pembelian, $row->tipe);
+        $url = 'http://127.0.0.1:8000/u-fest2024/' . $row->token_tiket;
+
+        $pesan = "*Terimakasih $this->nama_pembeli*\nAnda berhasil aktivasi Elektronik Tiket *UNIBA FESTIVAL 2024*\n\nSilahkan klik link berikut untuk mendownload e-tiket : $url\n\n_Ket:jagalah kerahasiaan e-tiket anda, karena e-tiket hanya bisa digunakan satu kali._";
+
+        $status = $otp->index($pesan, $this->nowa);
+        $otp->sendemail($this->email, $this->nama_pembeli, $this->kode, $row->tgl_pembelian, $row->tipe, $url);
         TransaksiModel::where('kode_tiket', $this->kode)->update(['status' => $status]);
     }
 }

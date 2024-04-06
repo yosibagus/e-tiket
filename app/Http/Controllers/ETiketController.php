@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TransaksiModel;
 use Illuminate\Http\Request;
 
 class ETiketController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        return view('etiket');
+        $detail = TransaksiModel::where('token_tiket', $id)->first();
+        return view('etiket', compact('detail'));
     }
 }

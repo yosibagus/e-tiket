@@ -3,7 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title> e-Tiket {{ $detail->nama_pembeli }} &raquo; UNIBA MADURA FESTIVAL 2024 </title>
+    <meta name="Author" content="Yosi Bagus Sadar Rasuli">
+    <meta name="Description" content="Akar Rumput dan Darah Daging Informatika">
+    <meta name="keywords" content="Turbo.main, UNIBA Madura, Informatika Uniba Madura, Yosi Bagus">
+    <meta name="image"content="{{ asset('konse.jpg') }}">
+    <meta property="og:image" content="{{ asset('konse.jpg') }}">
+    <link rel="icon" href="{{ asset('logo.png') }}" type="image/x-icon">
+
     <link rel="stylesheet" href="{{ asset('tiket.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
@@ -119,23 +126,25 @@
         </div>
 
         <div class="ticket-details">
-            {!! QrCode::size(150)->generate('Halo guys ini test') !!}
+            {!! QrCode::size(150)->generate($detail->token_tiket) !!}
 
             <div class="ticket">
                 <p style="margin-top: 15px;">Tiket Masuk</p>
 
-                <b>MAHASISWA</b>
+                <b>
+                    {{ $detail->tipe == 'mhs' ? 'Mahasiswa' : 'Reguler' }}
+                </b>
 
-                <p>PR-J11,J10,J9</p>
+                <p>{{ $detail->nama_pembeli }}</p>
 
-                <h6>BOOKING ID: Tbafeq7</h6>
+                <h6>BOOKING ID: {{ $detail->kode_tiket }}</h6>
 
             </div>
 
         </div>
 
         <div class="info-cancel">
-            Supported By
+            SUPPORTED BY
         </div>
 
         <div class="total-amount" style="text-align: center">
@@ -143,12 +152,11 @@
                 <img src="{{ asset('sponsor/xten.jpg') }}" width="30" alt="">
                 <img src="{{ asset('sponsor/pojur.jpg') }}" width="80" alt="">
                 <img src="{{ asset('sponsor/kabarmadura.png') }}" width="55" alt=""> &nbsp;
-                <img src="{{ asset('sponsor/turbo.png') }}" width="30" alt="">
+                {{-- <img src="{{ asset('sponsor/turbo.png') }}" width="30" alt=""> --}}
             </p>
         </div>
 
-    </div><!---m-ticket end---->
-
+    </div>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             jQuery("#download").click(function() {
@@ -156,19 +164,21 @@
             });
         });
 
+        var nama_file = "{{ $detail->nama_pembeli }}" + " - Elektronik Tiket.png";
+
         function screenshot() {
             html2canvas(document.querySelector(
-                "#photo"), { // Mengambil .custom-card sebagai elemen yang akan diubah menjadi gambar
-                scale: 2, // Menambahkan skala 2x untuk meningkatkan kualitas gambar
-                backgroundColor: null, // Menghilangkan warna latar belakang untuk transparansi
-                useCORS: true // Mengaktifkan penggunaan CORS
+                "#photo"), { 
+                scale: 2, 
+                backgroundColor: null,
+                useCORS: true 
             }).then(function(canvas) {
                 var ctx = canvas.getContext("2d");
-                ctx.shadowOffsetX = 5; // Menentukan offset bayangan horizontal
-                ctx.shadowOffsetY = 5; // Menentukan offset bayangan vertikal
-                ctx.shadowBlur = 10; // Menentukan ukuran blur bayangan
-                ctx.shadowColor = "rgba(0, 0, 0, 0.3)"; // Menentukan warna bayangan
-                downloadImage(canvas.toDataURL(), "UsersInformation.png"); // Mengunduh gambar dengan bayangan
+                ctx.shadowOffsetX = 5; 
+                ctx.shadowOffsetY = 5;
+                ctx.shadowBlur = 10; 
+                ctx.shadowColor = "rgba(0, 0, 0, 0.3)"; 
+                downloadImage(canvas.toDataURL(), nama_file); 
             });
         }
 

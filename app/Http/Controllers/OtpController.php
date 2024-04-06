@@ -13,7 +13,7 @@ class OtpController extends Controller
         $token = 'g7r6A7asVrhMPADP+ETN';
 
         $curl = curl_init();
-
+        $img = asset('konse.jpg');
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.fonnte.com/send',
             CURLOPT_RETURNTRANSFER => true,
@@ -26,7 +26,7 @@ class OtpController extends Controller
             CURLOPT_POSTFIELDS => array(
                 'target' => $target,
                 'message' => $pesan,
-                'url' => 'https://yosibgsdr.site',
+                'url' => $img,
             ),
             CURLOPT_HTTPHEADER => array(
                 "Authorization: " . $token . ""
@@ -41,7 +41,7 @@ class OtpController extends Controller
         return $data->status;
     }
 
-    public function sendemail($tujuan, $nama, $kode, $tgl_pesan, $tipe)
+    public function sendemail($tujuan, $nama, $kode, $tgl_pesan, $tipe, $url)
     {
         $mail = new PHPMailer(true);
 
@@ -166,8 +166,8 @@ class OtpController extends Controller
 
                                 <div style="margin:24px 0 0 0">
                                     <a style="font-family:Plus Jakarta Sans,sans-serif;text-decoration:none;display:block;background-color:#241ce6;color:white;text-align:center;border-radius:4px;font-size:13px;font-weight:500;letter-spacing:0.2px;padding:12px 0;border:none;width:100%"
-                                        href="https://yosibgsdr.site">
-                                        Lihat e-Tiket
+                                        href="'. $url .'">
+                                        Download e-Tiket
                                     </a>
                                 </div>
                             </div>
@@ -248,9 +248,6 @@ class OtpController extends Controller
                     </div>
                 </div>
                 <div class="adL">
-
-
-
                 </div>
             </div>
         </div>
