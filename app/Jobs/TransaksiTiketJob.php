@@ -38,7 +38,8 @@ class TransaksiTiketJob implements ShouldQueue
         $otp = new OtpController();
         $row = TransaksiModel::where('kode_tiket', $this->kode)->first();
 
-        $url = 'http://127.0.0.1:8000/u-fest2024/' . $row->token_tiket;
+        // $url = 'http://127.0.0.1:8000/u-fest2024/' . $row->token_tiket;
+        $url = url('u-fest2024/') . $row->token_tiket;
 
         $pesan = "*Terimakasih $this->nama_pembeli*\nAnda berhasil aktivasi Elektronik Tiket *UNIBA FESTIVAL 2024*\n\nSilahkan klik link berikut untuk mendownload e-tiket : $url\n\n_Ket:jagalah kerahasiaan e-tiket anda, karena e-tiket hanya bisa digunakan satu kali._";
 

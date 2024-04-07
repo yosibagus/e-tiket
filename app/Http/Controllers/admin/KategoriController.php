@@ -11,7 +11,7 @@ class KategoriController extends Controller
 {
     public function index()
     {
-        $kategori = KategoriModel::all();
+        $kategori = KategoriModel::where('id_kategori', '!=', 3)->get();
         return view('admin.kategori.kategori_view', compact('kategori'));
     }
 

@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index']);
 
     Route::get('/rekapitulasi-transaksi', [TransaksiController::class, 'rekapitulasi']);
+    Route::get('/transaksi/{id}/repeat', [TransaksiController::class, 'kirim_ulang']);
 
     Route::get('/transaksi/{tipe}', [TransaksiController::class, 'index']);
     Route::get('/transaksi/add/{tipe}', [TransaksiController::class, 'create']);

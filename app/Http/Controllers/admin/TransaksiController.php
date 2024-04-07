@@ -59,9 +59,12 @@ class TransaksiController extends Controller
         if ($tipe == 'mhs') {
             $nim = $request->nim_mahasiswa;
             $kat = 1;
-        } else {
+        } else if($tipe == 'non'){
             $nim = 'non-mahasiswa';
             $kat = 2;
+        } else {
+            $nim = 'non-mahasiswa';
+            $kat = 3;
         }
 
         $harga =  KategoriModel::where('id_kategori', $kat)->first();
@@ -96,5 +99,13 @@ class TransaksiController extends Controller
             $rekapitulasi = TransaksiModel::getTransaksi(Auth::user()->id)->get();
         }
         return view('admin.transaksi.transaksi_rekap', compact('rekapitulasi'));
+    }
+
+    public function kirim_ulang($token)
+    {
+        $data = TransaksiModel::where('token_tiket', $token)->first();
+        $job = new TransaksiTiketJob($data->nama_pembeli, $data->nowa_pembeli, $data->kode_tiket, $data->email_pembeli);
+        Queue::push($job);
+        return redirect('transaksi/' . $data->tipe)->with('success', 'e-tiket berhasil dikirim ulang');
     }
 }

@@ -45,7 +45,9 @@
                                                     Terkirim
                                                 </div>
                                             @else
-                                                <a href=""><i class="bi bi-arrow-clockwise"></i> Kirim Ulang</a>
+                                                <a href="{{ url('transaksi/' . $get->token_tiket . '/repeat') }}">
+                                                    <i class="bi bi-arrow-clockwise"></i> Kirim Ulang
+                                                </a>
                                             @endif
                                         </td>
                                     </tr>

@@ -20,7 +20,7 @@ class HomeController extends Controller
         $role = Auth::user()->role;
         $userid = Auth::user()->id;
         if ($role == 'Admin') {
-            $terjual = TransaksiModel::count();
+            $terjual = TransaksiModel::where('kategori_id', '!=', 3)->count();
             $penghasilan = TransaksiModel::getPenghasilan();
             $mhs = TransaksiModel::getTransaksiTipe('mhs')->count();
             $non = TransaksiModel::getTransaksiTipe('non')->count();

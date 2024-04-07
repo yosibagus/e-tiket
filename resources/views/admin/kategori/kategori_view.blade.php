@@ -10,10 +10,10 @@
                 <div class="card-header">
                     <h4 class="card-title">Kategori Tiket</h4>
                     <div class="d-flex justify-content-end">
-                        <a href="{{ url('setting/create') }}" class="btn btn-primary btn-sm">
+                        {{-- <a href="{{ url('setting/create') }}" class="btn btn-primary btn-sm">
                             <i class="bi bi-plus-lg"></i>
                             Tambah Kategori
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <div class="card-body">

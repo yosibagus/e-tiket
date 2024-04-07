@@ -84,7 +84,6 @@
 </head>
 
 <body>
-
     <div style="text-align: center;width:100%; margin-top:20px; margin-bottom:10px;">
         <button class="botao" id="download">
             <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +112,6 @@
 
             <div class="movie">
                 <h4><img src="{{ asset('logo.png') }}" width="120" alt=""></h4>
-
                 <p>2ND UNIBA FESTIVAL 2024</p>
                 <p>24 Mei | 16:45 PM</p>
                 <p>Lap. Basket UNIBA Madura</p>

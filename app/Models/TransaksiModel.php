@@ -25,8 +25,9 @@ class TransaksiModel extends Model
     public static function getTransaksi($id = null)
     {
         $query = DB::table('tb_tiket')
-            ->join('users', 'users.id', '=', 'tb_tiket.user_id');
-
+            ->join('users', 'users.id', '=', 'tb_tiket.user_id')
+            ->where('kategori_id', '!=', 3);
+            
         if (!empty($id)) {
             $query->where('user_id', $id);
         }
