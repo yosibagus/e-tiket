@@ -30,4 +30,21 @@ class KategoriController extends Controller
         KategoriModel::create($data);
         return redirect('setting')->with('success', 'Data Berhasil Disimpan');
     }
+
+    public function edit($id)
+    {
+        $detail = KategoriModel::where('id_kategori', $id)->first();
+        return view('admin.kategori.kategori_edit', compact('detail'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $data = [
+            'nama_kategori' => $request->nama_kategori,
+            'harga_kategori' => $request->harga_kategori
+        ];
+
+        KategoriModel::where('id_kategori', $id)->update($data);
+        return redirect('setting')->with('success', 'Data Berhasil di Perbaharui');
+    }
 }

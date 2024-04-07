@@ -52,4 +52,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/setting', [KategoriController::class, 'index']);
     Route::get('/setting/create', [KategoriController::class, 'create']);
     Route::post('/setting/create', [KategoriController::class, 'store']);
+    Route::get('/setting/{id}/edit', [KategoriController::class, 'edit']);
+    Route::post('/setting/{id}/edit', [KategoriController::class, 'update']);
 });

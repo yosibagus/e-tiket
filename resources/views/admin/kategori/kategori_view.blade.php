@@ -38,7 +38,7 @@
                                         <td>Rp{{ number_format($get->harga_kategori, 0, 2, '.') }}</td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                                <a href="{{ url('setting/' . $get->id_kategori . '/edit') }}" class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                         class="fa fa-pencil"></i></a>
                                             </div>
                                         </td>
