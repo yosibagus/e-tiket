@@ -30,7 +30,9 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::get('/u-fest2024/{id}', [ETiketController::class, 'index']);
-Route::get('/coba', [OtpController::class, 'coba']);
+Route::get('/scan', [ETiketController::class, 'scan']);
+Route::get('/scan/{id}', [ETiketController::class, 'scan_action']);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
 
