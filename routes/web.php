@@ -43,6 +43,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/transaksi/add/{tipe}', [TransaksiController::class, 'store']);
 
     Route::get('/akses', [AksesController::class, 'index']);
+    Route::get('/akses/create', [AksesController::class, 'create']);
+    Route::post('/akses/create', [AksesController::class, 'store']);
+    Route::get('/akses/{id}/edit', [AksesController::class, 'edit']);
+    Route::post('/akses/{id}/edit', [AksesController::class, 'update']);
+    Route::get('/akses/{id}/delete', [AksesController::class, 'delete']);
 
     Route::get('/setting', [KategoriController::class, 'index']);
     Route::get('/setting/create', [KategoriController::class, 'create']);
