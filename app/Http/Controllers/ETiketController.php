@@ -18,18 +18,5 @@ class ETiketController extends Controller
         }
     }
 
-    public function scan()
-    {
-        return view('scan.scan');
-    }
 
-    public function scan_action($id)
-    {
-        $data = [
-            'token_tiket' => $id,
-            'user_id' => 1,
-            'tgl_scan' => date('Y-m-d H:i:s'),
-        ];
-        ScanModel::create($data);
-    }
 }

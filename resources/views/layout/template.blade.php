@@ -158,12 +158,18 @@
                         </a>
                         <ul aria-expanded="false">
                             <li class="@active('transaksi/add/mhs')">
-                                <a class="@active('transaksi/add/mhs')" class="" href="{{ url('transaksi/mhs') }}">Mahasiswa UNIBA</a>
+                                <a class="@active('transaksi/add/mhs')" class=""
+                                    href="{{ url('transaksi/mhs') }}">Mahasiswa UNIBA</a>
                             </li>
                             <li class="@active('transaksi/add/non')">
                                 <a class="@active('transaksi/add/non')" href="{{ url('transaksi/non') }}">Non Mahasiswa</a>
                             </li>
                         </ul>
+                    </li>
+                    <li><a href="{{ url('/scan') }}" class="ai-icon" aria-expanded="false">
+                            <i class="flaticon-381-television"></i>
+                            <span class="nav-text">Scan e-Tiket</span>
+                        </a>
                     </li>
                     <li><a href="{{ url('rekapitulasi-transaksi') }}" class="ai-icon" aria-expanded="false">
                             <i class="flaticon-381-layer-1"></i>

@@ -59,7 +59,7 @@
         #scan-text {
             color: #FFF;
             font-size: 24px;
-            margin-top: 20px;
+            margin-top: 10px;
             z-index: 1;
         }
     </style>
@@ -70,24 +70,41 @@
         <img id="logo" src="https://turbo-main.my.id/logo/ufest.png" alt="Logo">
         <video id="video"></video>
         <div id="qr-box"></div>
-        <div id="scan-text">Scan QR Code</div>
+        <div id="scan-text" class="text-center">
+            <small>{{ Auth::user()->name }}</small>
+            <p style="font-size: 10px;">Validator Elektronik Tiket</p>
+        </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="{{ asset('jquery-3.7.1.min.js') }}"></script>
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
     <script>
         const scanner = new Instascan.Scanner({
             video: document.getElementById('video'),
-            mirror: false
+            mirror: false,
+            scanPeriod : 2
         });
         scanner.addListener('scan', function(content) {
-            alert('QR Code Result: ' + content);
+            $.ajax({
+                type: "POST",
+                url: "{{ url('scan') }}/" + content,
+                dataType: 'json',
+                success: function(data) {
+                    if (data.pesan == 404) {
+                        alert('qr tidak sah / tidak ditemukan');
+                    } else if (data.pesan == 500) {
+                        alert('e-tiket sudah digunakan');
+                    } else if (data.pesan == 200) {
+                        alert('QR Code Result: ' + content);
+                    }
+                }
+            })
         });
         Instascan.Camera.getCameras().then(function(cameras) {
             if (cameras.length > 0) {
                 scanner.start(cameras[0]);
             } else {
-                console.error('No cameras found.');
+                alert('Kamera tidak di izinkan');
             }
         }).catch(function(e) {
             console.error(e);

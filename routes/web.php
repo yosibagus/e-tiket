@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AksesController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\KategoriController;
+use App\Http\Controllers\admin\ScanController;
 use App\Http\Controllers\admin\TransaksiController;
 use App\Http\Controllers\ETiketController;
 use App\Http\Controllers\LoginController;
@@ -30,8 +31,6 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::get('/u-fest2024/{id}', [ETiketController::class, 'index']);
-Route::get('/scan', [ETiketController::class, 'scan']);
-Route::get('/scan/{id}', [ETiketController::class, 'scan_action']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [LoginController::class, 'logout']);
@@ -57,4 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/setting/create', [KategoriController::class, 'store']);
     Route::get('/setting/{id}/edit', [KategoriController::class, 'edit']);
     Route::post('/setting/{id}/edit', [KategoriController::class, 'update']);
+
+    Route::get('/scan', [ScanController::class, 'index']);
+    Route::get('/scan/{id}', [ScanController::class, 'scan_action']);
 });
